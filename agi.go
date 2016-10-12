@@ -1,4 +1,4 @@
-// Package agi provides very simple interface for interacting with PBX Asterisk from golang's routines
+// Package agi provides useful utilities for interacting with PBX Asterisk from golang's routines
 // using AGI protocol.
 package agi
 
@@ -20,7 +20,7 @@ func Read(c net.Conn) (s string, err error) {
 	return
 }
 
-// ReadAll collects input to string s from connection c until it meet empty line or by timeout (if set for c)
+// ReadLines collects input to string s from connection c until it meet empty line or by timeout (if set for c)
 func ReadLines(c net.Conn) (s string, err error) {
 	b := make([]byte, 1024)
 	var n int
@@ -69,7 +69,7 @@ func Write(c net.Conn, s string) (n int, err error) {
 	return
 }
 
-// Write writes to connection c string s with NL character
+// WriteLine writes to connection c string s with NL character
 func WriteLine(c net.Conn, s string) (n int, err error) {
 	n, err = c.Write([]byte(s + "\n"))
 

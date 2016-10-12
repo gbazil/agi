@@ -20,7 +20,7 @@ func Read(c net.Conn) (s string, err error) {
 	return
 }
 
-// ReadLines collects input to string s from connection c until it meet empty line or by timeout (if set for c)
+// ReadLines collects input into string s from connection c until meets empty line or timeout occurred (if it set for c)
 func ReadLines(c net.Conn) (s string, err error) {
 	b := make([]byte, 1024)
 	var n int
@@ -41,7 +41,7 @@ func ReadLines(c net.Conn) (s string, err error) {
 	return
 }
 
-// Parse parses AGI input to map m and return it
+// Parse parses text (AGI vars) into map m and return it
 func Parse(s string) (m map[string]string) {
 	m = make(map[string]string)
 	for _, val := range strings.Split(s, "\n") {
@@ -54,7 +54,7 @@ func Parse(s string) (m map[string]string) {
 	return
 }
 
-// ReadMap read agi input to map m from connection c and return it
+// ReadMap read agi input into map m from connection c and return it
 func ReadMap(c net.Conn) (m map[string]string, err error) {
 	var s string
 	s, err = ReadLines(c)

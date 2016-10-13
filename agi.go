@@ -15,6 +15,7 @@ For a example:
 	func handleConnection(c net.Conn) {
 		defer c.Close()
 
+		var ret string
 		m, _ := agi.ReadMap(c)
 
 		switch m["agi_dnid"] {

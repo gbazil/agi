@@ -1,5 +1,49 @@
-// Package agi provides useful utilities for interacting with PBX Asterisk from golang's routines
-// using AGI protocol.
+/*
+Package agi provides useful utilities for interacting with PBX Asterisk from golang's routines
+using AGI protocol.
+
+For example:
+
+	package main
+
+	import (
+		"fmt"
+		"net"
+		"strings"
+		"time"
+	)
+
+	func handleConnection(c net.Conn) {
+		defer c.Close()
+
+		var ret string
+
+		m, err := agi.ReadMap(c)
+
+		switch m["agi_dnid"] {
+		case "1234567890":
+			ret = "EXEC TRANSFER \"SIP/abc@somehost.com\""
+		case "1234567890":
+			ret = "EXEC TRANSFER \"SIP/bca@somehost.com\""
+		default:
+			ret = "EXEC HANGUP"
+		}
+
+		agi.WriteLine(c, ret)
+	}
+
+	func main() {
+		l, _ := net.Listen("tcp", ":4573")
+
+		defer l.Close()
+
+		for {
+			c, _ := l.Accept()
+			c.SetDeadline(time.Now().Add(time.Second * 5))
+			go handleConnection(c)
+		}
+	}
+*/
 package agi
 
 import (

@@ -27,6 +27,7 @@ For a example:
 		}
 
 		agi.WriteLine(c, ret)
+		agi.Read(c)
 	}
 
 	func main() {

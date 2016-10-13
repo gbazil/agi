@@ -7,26 +7,24 @@ For example:
 	package main
 
 	import (
-		"fmt"
 		"net"
-		"strings"
 		"time"
+		"github.com/gbazil/agi"
 	)
 
 	func handleConnection(c net.Conn) {
 		defer c.Close()
-
 		var ret string
 
-		m, err := agi.ReadMap(c)
+		m, _ := agi.ReadMap(c)
 
 		switch m["agi_dnid"] {
 		case "1234567890":
 			ret = "EXEC TRANSFER \"SIP/abc@somehost.com\""
-		case "1234567890":
+		case "0123456789":
 			ret = "EXEC TRANSFER \"SIP/bca@somehost.com\""
 		default:
-			ret = "EXEC HANGUP"
+			ret = "HANGUP"
 		}
 
 		agi.WriteLine(c, ret)
@@ -39,6 +37,7 @@ For example:
 
 		for {
 			c, _ := l.Accept()
+
 			c.SetDeadline(time.Now().Add(time.Second * 5))
 			go handleConnection(c)
 		}

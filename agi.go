@@ -2,7 +2,7 @@
 Package agi provides useful utilities for interacting with PBX Asterisk from golang's routines
 using AGI protocol.
 
-For example:
+For a example:
 
 	package main
 

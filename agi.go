@@ -119,3 +119,14 @@ func WriteLine(c net.Conn, s string) (n int, err error) {
 
 	return
 }
+
+// Command writes to connection c string s and return response r
+func Command(c net.Conn, s string) (r string, err error) {
+	_, err = WriteLine(c, s)
+	if err != nil {
+		return
+	}
+
+	r, err = Read(c)
+	return
+}
